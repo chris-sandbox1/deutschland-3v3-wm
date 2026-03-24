@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Deutschland – IFF 3v3 Floorball WM 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Eigener Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- Scroll-Fortschrittsbalken oben -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ========================= NAVBAR ========================= -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <!-- Deutschlandfahne als CSS-Block -->
+        <div class="flag-mini">
+          <span class="flag-black"></span>
+          <span class="flag-red"></span>
+          <span class="flag-gold"></span>
+        </div>
+        <span class="nav-logo-text">TEAM DEUTSCHLAND <em>3v3</em></span>
+      </a>
+      <button class="nav-burger" id="navBurger" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#spieler" class="nav-link">Spieler</a></li>
+        <li><a href="#bracket" class="nav-link">Bracket</a></li>
+        <li><a href="#ergebnisse" class="nav-link">Ergebnisse</a></li>
+        <li><a href="#spenden" class="nav-link nav-cta">Spenden ❤</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========================= HERO ========================= -->
+  <section class="hero" id="hero">
+    <!-- Partikel-Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Diagonale Akzentlinien -->
+    <div class="hero-lines">
+      <div class="hero-line hero-line--1"></div>
+      <div class="hero-line hero-line--2"></div>
+      <div class="hero-line hero-line--3"></div>
+    </div>
+
+    <!-- Deutschland-Farben-Streifen oben -->
+    <div class="hero-flag-stripe">
+      <div class="stripe-black"></div>
+      <div class="stripe-red"></div>
+      <div class="stripe-gold"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge reveal">IFF 3v3 WORLD FLOORBALL CHAMPIONSHIPS 2026</div>
+      <h1 class="hero-title reveal">
+        <span class="typewriter" id="typewriterText"></span>
+        <span class="typewriter-cursor">|</span>
+      </h1>
+      <p class="hero-sub reveal">
+        12.–14. Juni 2026 &nbsp;·&nbsp; El Escorial, Spanien
+      </p>
+
+      <!-- Countdown -->
+      <div class="countdown reveal" id="countdown">
+        <div class="countdown-item">
+          <span class="countdown-num" id="cdDays">--</span>
+          <span class="countdown-label">Tage</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item">
+          <span class="countdown-num" id="cdHours">--</span>
+          <span class="countdown-label">Stunden</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item">
+          <span class="countdown-num" id="cdMinutes">--</span>
+          <span class="countdown-label">Minuten</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item">
+          <span class="countdown-num" id="cdSeconds">--</span>
+          <span class="countdown-label">Sekunden</span>
+        </div>
+      </div>
+
+      <div class="hero-buttons reveal">
+        <a href="#spenden" class="btn btn--primary">Jetzt unterstützen</a>
+        <a href="#bracket" class="btn btn--ghost">Turnierbaum ansehen</a>
+      </div>
+    </div>
+
+    <!-- Scroll-Hinweis -->
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- ========================= ÜBER DAS TURNIER ========================= -->
+  <section class="info-section section" id="info">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Das Event</span>
+        <h2 class="section-title">IFF 3v3 World Floorball<br>Championships 2026</h2>
+      </div>
+
+      <div class="info-cards">
+        <!-- Karte 1: Ort -->
+        <div class="info-card reveal">
+          <div class="info-card-icon">📍</div>
+          <h3 class="info-card-title">Austragungsort</h3>
+          <p class="info-card-value">El Escorial</p>
+          <p class="info-card-sub">San Lorenzo de El Escorial, Spanien<br>in der Nähe von Madrid</p>
+        </div>
+        <!-- Karte 2: Datum -->
+        <div class="info-card reveal">
+          <div class="info-card-icon">📅</div>
+          <h3 class="info-card-title">Turnierdatum</h3>
+          <p class="info-card-value">12.–14. Juni</p>
+          <p class="info-card-sub">2026 &nbsp;·&nbsp; 3 intensive Turniertage<br>Gruppenphase + K.O.-Runde</p>
+        </div>
+        <!-- Karte 3: Format -->
+        <div class="info-card reveal">
+          <div class="info-card-icon">🏒</div>
+          <h3 class="info-card-title">Spielformat</h3>
+          <p class="info-card-value">3 + 1</p>
+          <p class="info-card-sub">3 Feldspieler + 1 Torwart<br>2 × 10 Minuten pro Spiel</p>
+        </div>
+        <!-- Karte 4: Teams -->
+        <div class="info-card reveal">
+          <div class="info-card-icon">🌍</div>
+          <h3 class="info-card-title">Teilnehmer</h3>
+          <p class="info-card-value">51 Teams</p>
+          <p class="info-card-sub">28 Herren + 23 Damen<br>aus aller Welt</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= SPIELER ========================= -->
+  <section class="players-section section" id="spieler">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Unser Team</span>
+        <h2 class="section-title">Die Spieler</h2>
+        <p class="section-sub">
+          ⚠️ <em>Platzhalter-Daten — echte Spieler & Fotos hier eintragen!</em>
+        </p>
+      </div>
+
+      <div class="players-grid">
+
+        <!-- Spieler 1 -->
+        <div class="player-card reveal" data-tilt>
+          <div class="player-card-inner">
+            <div class="player-number">#7</div>
+            <div class="player-img-wrap">
+              <!-- Platzhalter-Foto von randomuser.me -->
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Max Müller" class="player-img" loading="lazy" />
+              <div class="player-img-overlay"></div>
+            </div>
+            <div class="player-info">
+              <h3 class="player-name">Max Müller</h3>
+              <span class="player-pos">Stürmer</span>
+              <div class="player-stats">
+                <div class="player-stat">
+                  <span class="stat-num">14</span>
+                  <span class="stat-label">Tore</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 87%"></div></div>
+                </div>
+                <div class="player-stat">
+                  <span class="stat-num">9</span>
+                  <span class="stat-label">Assists</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 56%"></div></div>
+                </div>
+                <div class="player-stat">
+                  <span class="stat-num">22</span>
+                  <span class="stat-label">Spiele</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 70%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spieler 2 -->
+        <div class="player-card reveal" data-tilt>
+          <div class="player-card-inner">
+            <div class="player-number">#11</div>
+            <div class="player-img-wrap">
+              <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Jonas Weber" class="player-img" loading="lazy" />
+              <div class="player-img-overlay"></div>
+            </div>
+            <div class="player-info">
+              <h3 class="player-name">Jonas Weber</h3>
+              <span class="player-pos">Verteidiger</span>
+              <div class="player-stats">
+                <div class="player-stat">
+                  <span class="stat-num">5</span>
+                  <span class="stat-label">Tore</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 31%"></div></div>
+                </div>
+                <div class="player-stat">
+                  <span class="stat-num">18</span>
+                  <span class="stat-label">Assists</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 100%"></div></div>
+                </div>
+                <div class="player-stat">
+                  <span class="stat-num">24</span>
+                  <span class="stat-label">Spiele</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 76%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spieler 3 -->
+        <div class="player-card reveal" data-tilt>
+          <div class="player-card-inner">
+            <div class="player-number">#1</div>
+            <div class="player-img-wrap">
+              <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Lukas Bauer" class="player-img" loading="lazy" />
+              <div class="player-img-overlay"></div>
+            </div>
+            <div class="player-info">
+              <h3 class="player-name">Lukas Bauer</h3>
+              <span class="player-pos">Torwart</span>
+              <div class="player-stats">
+                <div class="player-stat">
+                  <span class="stat-num">92%</span>
+                  <span class="stat-label">Fangquote</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 92%"></div></div>
+                </div>
+                <div class="player-stat">
+                  <span class="stat-num">3</span>
+                  <span class="stat-label">Clean Sheets</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 60%"></div></div>
+                </div>
+                <div class="player-stat">
+                  <span class="stat-num">20</span>
+                  <span class="stat-label">Spiele</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 64%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spieler 4 -->
+        <div class="player-card reveal" data-tilt>
+          <div class="player-card-inner">
+            <div class="player-number">#23</div>
+            <div class="player-img-wrap">
+              <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Tim Schneider" class="player-img" loading="lazy" />
+              <div class="player-img-overlay"></div>
+            </div>
+            <div class="player-info">
+              <h3 class="player-name">Tim Schneider</h3>
+              <span class="player-pos">Stürmer / Allrounder</span>
+              <div class="player-stats">
+                <div class="player-stat">
+                  <span class="stat-num">11</span>
+                  <span class="stat-label">Tore</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 69%"></div></div>
+                </div>
+                <div class="player-stat">
+                  <span class="stat-num">14</span>
+                  <span class="stat-label">Assists</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 78%"></div></div>
+                </div>
+                <div class="player-stat">
+                  <span class="stat-num">25</span>
+                  <span class="stat-label">Spiele</span>
+                  <div class="stat-bar"><div class="stat-bar-fill" style="--pct: 79%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= TURNIERBAUM ========================= -->
+  <section class="bracket-section section" id="bracket">
+    <div class="container container--wide">
+      <div class="section-header reveal">
+        <span class="section-tag">K.O.-Runde</span>
+        <h2 class="section-title">Turnierbaum</h2>
+        <p class="section-sub">⚠️ <em>Platzhalter-Bracket — wird mit echten Daten befüllt</em></p>
+      </div>
+
+      <div class="bracket reveal">
+
+        <!-- Viertelfinale -->
+        <div class="bracket-round">
+          <div class="bracket-round-label">Viertelfinale</div>
+          <div class="bracket-matches">
+
+            <div class="bracket-match" data-match="qf1">
+              <div class="bracket-team bracket-team--germany">
+                <span class="team-flag">🇩🇪</span>
+                <span class="team-name">Deutschland</span>
+                <span class="team-score">3</span>
+              </div>
+              <div class="bracket-team">
+                <span class="team-flag">🇳🇴</span>
+                <span class="team-name">Norwegen</span>
+                <span class="team-score">1</span>
+              </div>
+            </div>
+
+            <div class="bracket-match" data-match="qf2">
+              <div class="bracket-team">
+                <span class="team-flag">🇸🇪</span>
+                <span class="team-name">Schweden</span>
+                <span class="team-score">TBD</span>
+              </div>
+              <div class="bracket-team">
+                <span class="team-flag">🇺🇸</span>
+                <span class="team-name">USA</span>
+                <span class="team-score">TBD</span>
+              </div>
+            </div>
+
+            <div class="bracket-match" data-match="qf3">
+              <div class="bracket-team">
+                <span class="team-flag">🇫🇮</span>
+                <span class="team-name">Finnland</span>
+                <span class="team-score">TBD</span>
+              </div>
+              <div class="bracket-team">
+                <span class="team-flag">🇨🇦</span>
+                <span class="team-name">Kanada</span>
+                <span class="team-score">TBD</span>
+              </div>
+            </div>
+
+            <div class="bracket-match" data-match="qf4">
+              <div class="bracket-team">
+                <span class="team-flag">🇨🇭</span>
+                <span class="team-name">Schweiz</span>
+                <span class="team-score">TBD</span>
+              </div>
+              <div class="bracket-team">
+                <span class="team-flag">🇨🇿</span>
+                <span class="team-name">Tschechien</span>
+                <span class="team-score">TBD</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Halbfinale -->
+        <div class="bracket-round">
+          <div class="bracket-round-label">Halbfinale</div>
+          <div class="bracket-matches">
+
+            <div class="bracket-match bracket-match--future" data-match="sf1">
+              <div class="bracket-team bracket-team--germany">
+                <span class="team-flag">🇩🇪</span>
+                <span class="team-name">Deutschland</span>
+                <span class="team-score">–</span>
+              </div>
+              <div class="bracket-team">
+                <span class="team-flag">🏳</span>
+                <span class="team-name">TBD</span>
+                <span class="team-score">–</span>
+              </div>
+            </div>
+
+            <div class="bracket-match bracket-match--future" data-match="sf2">
+              <div class="bracket-team">
+                <span class="team-flag">🏳</span>
+                <span class="team-name">TBD</span>
+                <span class="team-score">–</span>
+              </div>
+              <div class="bracket-team">
+                <span class="team-flag">🏳</span>
+                <span class="team-name">TBD</span>
+                <span class="team-score">–</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Finale -->
+        <div class="bracket-round bracket-round--final">
+          <div class="bracket-round-label">Finale 🏆</div>
+          <div class="bracket-matches">
+
+            <div class="bracket-match bracket-match--future bracket-match--final" data-match="final">
+              <div class="bracket-team bracket-team--germany">
+                <span class="team-flag">🇩🇪</span>
+                <span class="team-name">Deutschland</span>
+                <span class="team-score">–</span>
+              </div>
+              <div class="bracket-team">
+                <span class="team-flag">🏳</span>
+                <span class="team-name">TBD</span>
+                <span class="team-score">–</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= ERGEBNISSE ========================= -->
+  <section class="results-section section" id="ergebnisse">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Gruppenphase</span>
+        <h2 class="section-title">Ergebnistabelle</h2>
+        <p class="section-sub">⚠️ <em>Platzhalter-Ergebnisse — wird live aktualisiert</em></p>
+      </div>
+
+      <div class="table-wrap reveal">
+        <table class="results-table" id="resultsTable">
+          <thead>
+            <tr>
+              <th class="th-pos">#</th>
+              <th class="th-team">Team</th>
+              <th class="th-sortable" data-col="sp">Sp.</th>
+              <th class="th-sortable" data-col="s">S</th>
+              <th class="th-sortable" data-col="u">U</th>
+              <th class="th-sortable" data-col="n">N</th>
+              <th class="th-sortable" data-col="tore">Tore</th>
+              <th class="th-sortable th-pts" data-col="pts">Pkt.</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Wird von script.js befüllt -->
+          </tbody>
+        </table>
+        <p class="table-note">Klick auf eine Spaltenüberschrift zum Sortieren</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= SPENDEN ========================= -->
+  <section class="donate-section section" id="spenden">
+    <div class="donate-bg-lines"></div>
+    <div class="container">
+      <div class="donate-inner reveal">
+        <div class="donate-badge">❤ Unterstütze uns</div>
+        <h2 class="donate-title">Hilf uns nach<br><span class="text-gold">Spanien</span> zu kommen!</h2>
+        <p class="donate-text">
+          Jeder Euro zählt — ob für Flüge, Unterkunft oder Ausrüstung.
+          Mit deiner Unterstützung können wir Team Deutschland würdig bei
+          der 3v3 Floorball WM 2026 in El Escorial vertreten.
+        </p>
+
+        <!-- Fortschrittsbalken -->
+        <div class="progress-wrap">
+          <div class="progress-labels">
+            <span class="progress-current">730 € gesammelt</span>
+            <span class="progress-goal">Ziel: 1.000 €</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressFill" style="--target-pct: 73%"></div>
+          </div>
+          <div class="progress-pct">73% erreicht 🔥</div>
+        </div>
+
+        <!-- PayPal-Button -->
+        <!-- ⚠️ PLATZHALTER: Eigenen PayPal-Link eintragen! -->
+        <a href="https://www.paypal.com/paypalme/DEIN-LINK-HIER" target="_blank" rel="noopener" class="btn btn--donate">
+          <svg class="paypal-icon" viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+            <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/>
+          </svg>
+          Mit PayPal spenden
+        </a>
+
+        <p class="donate-thanks">Vielen Dank für deine Unterstützung! 🙏</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= FOOTER ========================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <div class="flag-mini">
+            <span class="flag-black"></span>
+            <span class="flag-red"></span>
+            <span class="flag-gold"></span>
+          </div>
+          <span>TEAM DEUTSCHLAND 3v3</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.floorball.sport" target="_blank" rel="noopener">IFF Floorball</a>
+          <a href="https://floorball.de" target="_blank" rel="noopener">Floorball Deutschland</a>
+          <a href="https://3v3wfcspain.com" target="_blank" rel="noopener">Offizielle WM-Site</a>
+        </div>
+        <div class="footer-social">
+          <!-- Platzhalter-Icons -->
+          <a href="#" aria-label="Instagram" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="TikTok" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.53V6.78a4.85 4.85 0 0 1-1.02-.09z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Team Deutschland 3v3 Floorball WM &nbsp;·&nbsp; Alle Angaben ohne Gewähr</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
