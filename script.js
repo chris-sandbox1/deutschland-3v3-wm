@@ -268,14 +268,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
    ============================================================ */
 (function initVoting() {
 
-  // Start-Stimmenverteilung (Seed-Daten damit Balken nicht leer starten)
-  const SEEDS = {
-    topscorer: { mystery: 4, fiemel: 18, goers: 12, holtgraefe: 22, besch: 9, ender: 11, wende: 14, thiele: 8 },
-    howfar:    { vorrunde: 2, achtelfinale: 5, viertelfinale: 14, halbfinale: 21, bronze: 11, titel: 38 },
-    penalties: { mystery: 7, fiemel: 9, goers: 11, holtgraefe: 19, besch: 13, ender: 8, wende: 15, thiele: 6 },
-    shooter:   { mystery: 5, fiemel: 20, goers: 10, holtgraefe: 18, besch: 8, ender: 12, wende: 16, thiele: 9 },
-  };
-
   // Alle Polls auf der Seite finden
   document.querySelectorAll('.poll').forEach(pollEl => {
     const pollKey = pollEl.dataset.poll;
@@ -287,8 +279,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     const storedVotes = JSON.parse(localStorage.getItem(storageKey) || 'null');
     const userVote    = localStorage.getItem(userVoteKey);
 
-    // Aktuellen Stimmenstand ermitteln (gespeichert oder Seed)
-    let votes = storedVotes || Object.assign({}, SEEDS[pollKey] || {});
+    // Aktuellen Stimmenstand: nur echte abgegebene Stimmen, kein Seed
+    let votes = storedVotes || {};
 
     // Alle Option-Buttons aufbauen (HTML-Struktur erweitern)
     const optionButtons = pollEl.querySelectorAll('.poll-option');
@@ -343,6 +335,46 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
           btn.classList.add('my-vote');
         }
       });
+
+      // "Stimme zurücknehmen"-Button einfügen falls noch nicht vorhanden
+      if (!pollEl.querySelector('.poll-undo-btn')) {
+        const undoBtn = document.createElement('button');
+        undoBtn.className = 'poll-undo-btn';
+        undoBtn.textContent = 'Stimme zurücknehmen';
+        undoBtn.addEventListener('click', () => {
+          // Stimme dekrementieren (min. 0)
+          votes[votedVal] = Math.max(0, (votes[votedVal] || 1) - 1);
+
+          // localStorage aktualisieren
+          localStorage.setItem(storageKey, JSON.stringify(votes));
+          localStorage.removeItem(userVoteKey);
+
+          // Voted-Zustand aufheben
+          pollEl.classList.remove('voted');
+          optionButtons.forEach(btn => {
+            btn.disabled = false;
+            btn.classList.remove('my-vote');
+          });
+
+          // Balken zurücksetzen wenn keine Stimmen mehr
+          if (totalVotes() === 0) {
+            optionButtons.forEach(btn => {
+              const bar   = btn.querySelector('.option-bar');
+              const pctEl = btn.querySelector('.option-pct');
+              if (bar)   { bar.style.transition = 'none'; bar.style.transform = 'scaleX(0)'; }
+              if (pctEl) pctEl.textContent = '0%';
+            });
+            if (statusEl) statusEl.textContent = '0 Stimmen abgegeben';
+          } else {
+            renderResults(true);
+            if (statusEl) statusEl.textContent = totalVotes() + ' Stimme' + (totalVotes() !== 1 ? 'n' : '') + ' abgegeben';
+          }
+
+          // Undo-Button entfernen
+          undoBtn.remove();
+        });
+        pollEl.appendChild(undoBtn);
+      }
     }
 
     // Falls bereits abgestimmt: Ergebnisse direkt zeigen
