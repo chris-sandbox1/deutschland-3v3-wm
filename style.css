@@ -687,6 +687,32 @@ img { display: block; max-width: 100%; }
 .footer-social { display: flex; gap: 16px; }
 .social-icon { color: var(--gray); transition: color var(--transition), transform var(--transition); display: flex; align-items: center; }
 .social-icon:hover { color: var(--gold); transform: translateY(-3px); }
+/* Hero-Wappen (dezentes Watermark) */
+.hero-wappen {
+  position: absolute;
+  right: 6%;
+  bottom: 12%;
+  width: 160px;
+  opacity: 0.20;
+  filter: invert(1);
+  pointer-events: none;
+  user-select: none;
+}
+@media (max-width: 768px) { .hero-wappen { width: 90px; opacity: 0.05; right: 3%; bottom: 8%; } }
+
+/* Footer Partner-Logos */
+.footer-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 28px 0 20px;
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+.footer-partner-logo { height: 52px; width: auto; opacity: 0.45; transition: opacity .25s; }
+.footer-partner-logo:hover { opacity: 0.85; }
+.footer-partner-logo--wappen { filter: invert(1); }
+
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.04); padding-top: 24px; text-align: center; }
 .footer-bottom p { font-size: .73rem; color: var(--gray); letter-spacing: 1px; }
 
