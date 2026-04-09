@@ -403,8 +403,21 @@ img { display: block; max-width: 100%; }
   width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
   background: radial-gradient(ellipse at center, rgba(255,215,0,.04) 0%, transparent 70%);
+  position: relative; overflow: hidden;
 }
-.tsc-logo-placeholder img { width: 62%; height: auto; }
+.tsc-logo-placeholder::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(to top, var(--dark2) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.tsc-logo-placeholder img {
+  width: 65%; height: 75%;
+  object-fit: contain;
+  position: relative; z-index: 0;
+}
 
 .tsc-logo-placeholder--coach {
   width: 72px; height: 72px; border-radius: 50%;
@@ -571,6 +584,8 @@ img { display: block; max-width: 100%; }
 .progress-pct { text-align: right; font-size: .8rem; color: var(--gold); margin-top: 8px; font-weight: 600; letter-spacing: 1px; }
 
 .donate-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+.donate-hint    { color: var(--gray); font-size: .8rem; margin-bottom: 6px; }
+.donate-hint strong { color: var(--gold); }
 .donate-thanks  { color: var(--gray); font-size: .9rem; }
 
 /* ============================================================
